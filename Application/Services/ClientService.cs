@@ -1,4 +1,5 @@
 ﻿using Domain.DTOs;
+using Domain.Entities;
 using Domain.Interfaces.Repository;
 using Domain.Interfaces.Services;
 using System;
@@ -11,27 +12,34 @@ namespace Application.Services
 {
     public class ClientService : IClientService
     {
-        private readonly IClientRepository _clientRepository;
+        private IClientRepository _clientRepository;
 
         public ClientService(IClientRepository clientRepository)
         {
             this._clientRepository = clientRepository;
         }
 
-        public List<ClientModel> GetAllClients()
+        //public List<ClientModel> GetAllClients()
+        //{
+        //    var clients = _clientRepository.GetClients();
+
+        //    var clientsList = clients.Select(x => new ClientModel()
+        //    {
+        //        //ClientId = x.ClientId,
+        //        ClientName = x.ClientName,
+        //        LastName = x.LastName,
+        //        Email = x.Email,
+        //        //FkWalletId = x.FkWalletId
+        //    }).ToList();
+
+        //    return clientsList;
+        //}
+
+        public Client CreateClient(ClientModel clientModel)
         {
-            var clients = _clientRepository.GetClients();
+            var client = _clientRepository.CreateClient(clientModel);
 
-            var clientsList = clients.Select(x => new ClientModel()
-            {
-                //ClientId = x.ClientId,
-                ClientName = x.ClientName,
-                LastName = x.LastName,
-                Email = x.Email,
-                //FkWalletId = x.FkWalletId
-            }).ToList();
-
-            return clientsList;
+            return client;
         }
     }
 }

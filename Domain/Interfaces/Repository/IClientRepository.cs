@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace Domain.Interfaces.Repository
 {
     public interface IClientRepository
     {
-       public List<Client> GetClients();
-        //Client CreateClient();
+       //public List<Client> GetClients();
+       public Client CreateClient(ClientModel clientModel);
         //Client UpdateClient();
         //void DeleteClient();
     }

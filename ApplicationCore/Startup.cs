@@ -1,4 +1,8 @@
+using Application.Services;
+using Domain.Interfaces.Repository;
+using Domain.Interfaces.Services;
 using Infrastructure;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -24,8 +28,10 @@ namespace ApplicationCore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DigitalAccountContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DATABASE_CN_STRING")));
+            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IClientService, ClientService>();
+            services.AddDbContext<DigitalAccountContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DATABASE_CN_STRING")));
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -35,14 +41,13 @@ namespace ApplicationCore
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }

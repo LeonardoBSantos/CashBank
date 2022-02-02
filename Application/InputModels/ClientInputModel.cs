@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.DTOs
+namespace Application.InputModels
 {
-    public class ClientModel
+    public class ClientInputModel
     {
         [JsonProperty("clientName")]
         public string ClientName { get; set; }
