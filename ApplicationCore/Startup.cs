@@ -1,5 +1,4 @@
 using Application.Services;
-using ApplicationCore.Middleware;
 using Domain.Interfaces.Repository;
 using Domain.Interfaces.Services;
 using Infrastructure;
@@ -37,7 +36,11 @@ namespace ApplicationCore
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseOptions();
+            app.UseCors(builder => {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+            });
 
             if (env.IsDevelopment())
             {

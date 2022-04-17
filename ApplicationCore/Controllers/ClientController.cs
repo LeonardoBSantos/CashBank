@@ -30,7 +30,7 @@ namespace ApplicationCore.Controllers
             {
                 var client = clientService.CreateClient(clientModel);
 
-                return Ok(ClientMap.Map(client));
+                return Created("", ClientMap.Map(client));
             }
             catch(Exception)
             {
