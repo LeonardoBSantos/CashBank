@@ -1,4 +1,5 @@
 using Application.Services;
+using ApplicationCore.Middleware;
 using Domain.Interfaces.Repository;
 using Domain.Interfaces.Services;
 using Infrastructure;
@@ -36,6 +37,8 @@ namespace ApplicationCore
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseOptions();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
