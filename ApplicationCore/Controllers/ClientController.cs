@@ -23,6 +23,13 @@ namespace ApplicationCore.Controllers
             this.clientService = ClientService;
         }
 
+        [HttpGet]
+        public IActionResult GetClientById([FromQuery] string id)
+        {
+            var client = clientService.GetClientById(id);
+            return Ok(client);
+        }
+
         [HttpPost("Create")]
         public IActionResult CreateClient([FromBody] ClientModel clientModel)
         {
