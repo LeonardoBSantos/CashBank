@@ -19,21 +19,21 @@ namespace Application.Services
             this._clientRepository = clientRepository;
         }
 
-        //public List<ClientModel> GetAllClients()
-        //{
-        //    var clients = _clientRepository.GetClients();
+        public ClientModel GetClientById(string id)
+        {
+            var client = _clientRepository.GetClientById(id);
 
-        //    var clientsList = clients.Select(x => new ClientModel()
-        //    {
-        //        //ClientId = x.ClientId,
-        //        ClientName = x.ClientName,
-        //        LastName = x.LastName,
-        //        Email = x.Email,
-        //        //FkWalletId = x.FkWalletId
-        //    }).ToList();
+            var clientById = new ClientModel()
+            {
+                ClientName = client.ClientName,
+                LastName = client.LastName,
+                Email = client.Email,
+                Phone = client.phone,
+                Address = client.address
+            };
 
-        //    return clientsList;
-        //}
+            return clientById;
+        }
 
         public Client CreateClient(ClientModel clientModel)
         {

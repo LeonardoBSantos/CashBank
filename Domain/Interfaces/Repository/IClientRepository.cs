@@ -10,8 +10,8 @@ namespace Domain.Interfaces.Repository
 {
     public interface IClientRepository
     {
-       //public List<Client> GetClients();
-       public Client CreateClient(ClientModel clientModel);
+        public Client GetClientById(string id);
+        public Client CreateClient(ClientModel clientModel);
         //Client UpdateClient();
         //void DeleteClient();
     }

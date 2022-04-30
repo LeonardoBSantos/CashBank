@@ -10,7 +10,7 @@ namespace Domain.Interfaces.Services
 {
     public interface IClientService
     {
-        //List<ClientModel> GetAllClients();
+        ClientModel GetClientById(string id);
         //public Decimal GetBalance();
         public Client CreateClient(ClientModel clientModel);
     }
