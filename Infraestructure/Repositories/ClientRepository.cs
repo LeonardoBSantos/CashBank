@@ -18,6 +18,13 @@ namespace Infrastructure.Repositories
             this._digitalAccountContext = digitalAccountContext;
         }
 
+        public Client GetClientByEmail(string email)
+        {
+            var clients = _digitalAccountContext.Clients.FirstOrDefault(x => x.Email == email);
+
+            return clients;
+        }
+
         public Client GetClientById(string id)
         {
             var clients = _digitalAccountContext.Clients.FirstOrDefault(x => x.ClientId.ToString() == id);

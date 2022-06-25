@@ -26,8 +26,16 @@ namespace ApplicationCore.Controllers
         [HttpGet]
         public IActionResult GetClientById([FromQuery] string id)
         {
-            var client = clientService.GetClientById(id);
-            return Ok(client);
+            try
+            {
+                var client = clientService.GetClientById(id);
+                return Ok(client);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         [HttpPost("Create")]
@@ -39,9 +47,9 @@ namespace ApplicationCore.Controllers
 
                 return Created("", ClientMap.Map(client));
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                throw;
+                return BadRequest(ex.Message);
             }
         }
     }
