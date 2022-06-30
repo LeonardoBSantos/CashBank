@@ -19,25 +19,36 @@ namespace Application.Services
             this._clientRepository = clientRepository;
         }
 
-        //public List<ClientModel> GetAllClients()
-        //{
-        //    var clients = _clientRepository.GetClients();
+        public ClientModel GetClientById(string id)
+        {
+            var client = _clientRepository.GetClientById(id);
 
-        //    var clientsList = clients.Select(x => new ClientModel()
-        //    {
-        //        //ClientId = x.ClientId,
-        //        ClientName = x.ClientName,
-        //        LastName = x.LastName,
-        //        Email = x.Email,
-        //        //FkWalletId = x.FkWalletId
-        //    }).ToList();
+            if(client == null)
+            {
+                throw new Exception("Cliente inexistente na base de dados");
+            }
 
-        //    return clientsList;
-        //}
+            var clientById = new ClientModel()
+            {
+                ClientName = client.ClientName,
+                LastName = client.LastName,
+                Email = client.Email,
+                Phone = client.phone,
+                Address = client.address
+            };
+
+            return clientById;
+        }
 
         public Client CreateClient(ClientModel clientModel)
         {
-            var client = _clientRepository.CreateClient(clientModel);
+            Client EmailExists = _clientRepository.GetClientByEmail(clientModel.Email);
+            if(EmailExists != null)
+            {
+                throw new InvalidOperationException("O E-mail preenchido já foi usado em outra conta");
+            }
+
+            Client client = _clientRepository.CreateClient(clientModel);
 
             return client;
         }

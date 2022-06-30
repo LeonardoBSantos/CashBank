@@ -23,6 +23,21 @@ namespace ApplicationCore.Controllers
             this.clientService = ClientService;
         }
 
+        [HttpGet]
+        public IActionResult GetClientById([FromQuery] string id)
+        {
+            try
+            {
+                var client = clientService.GetClientById(id);
+                return Ok(client);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+        }
+
         [HttpPost("Create")]
         public IActionResult CreateClient([FromBody] ClientModel clientModel)
         {
@@ -30,11 +45,11 @@ namespace ApplicationCore.Controllers
             {
                 var client = clientService.CreateClient(clientModel);
 
-                return Ok(ClientMap.Map(client));
+                return Created("", ClientMap.Map(client));
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                throw;
+                return BadRequest(ex.Message);
             }
         }
     }

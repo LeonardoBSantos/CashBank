@@ -14,6 +14,7 @@ namespace Application.Mappings
         {
             var response = new ClientViewModel()
             {
+                ClientId = client.ClientId,
                 ClientName = client.ClientName,
                 LastName = client.LastName,
                 Email = client.Email,

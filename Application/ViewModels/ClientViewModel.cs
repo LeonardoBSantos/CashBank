@@ -9,6 +9,9 @@ namespace Application.ViewModels
 {
     public class ClientViewModel
     {
+        [JsonProperty("clientId")]
+        public Guid ClientId { get; set; }
+
         [JsonProperty("clientName")]
         public string ClientName { get; set; }
 
