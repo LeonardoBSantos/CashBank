@@ -23,6 +23,11 @@ namespace Application.Services
         {
             var client = _clientRepository.GetClientById(id);
 
+            if(client == null)
+            {
+                throw new Exception("Cliente inexistente na base de dados");
+            }
+
             var clientById = new ClientModel()
             {
                 ClientName = client.ClientName,
@@ -37,7 +42,13 @@ namespace Application.Services
 
         public Client CreateClient(ClientModel clientModel)
         {
-            var client = _clientRepository.CreateClient(clientModel);
+            Client EmailExists = _clientRepository.GetClientByEmail(clientModel.Email);
+            if(EmailExists != null)
+            {
+                throw new InvalidOperationException("O E-mail preenchido já foi usado em outra conta");
+            }
+
+            Client client = _clientRepository.CreateClient(clientModel);
 
             return client;
         }
