@@ -21,6 +21,17 @@ namespace CashBank_Tests
         }
 
         [Fact]
+        public void Get_ClientById()
+        {
+            var id = "3622EF13-EF8C-4C94-C309-08DA56E9B627";
+
+            clientService.GetClientById(id);
+            //Assert.ThrowsAny<Exception>(() => clientService.CreateClient(model));
+            var exception = Record.Exception(() => clientService.GetClientById(id));
+            Assert.Null(exception);
+        }
+
+        [Fact]
         public void Post_Create_Client()
         {
             var model = new ClientModel()

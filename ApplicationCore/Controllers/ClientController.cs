@@ -17,10 +17,12 @@ namespace ApplicationCore.Controllers
     public class ClientController : ControllerBase
     {
         private IClientService clientService;
+        private IWalletService walletService;
 
-        public ClientController(IClientService ClientService)
+        public ClientController(IClientService ClientService, IWalletService WalletService)
         {
             this.clientService = ClientService;
+            this.walletService = WalletService;
         }
 
         [HttpGet]
@@ -45,9 +47,11 @@ namespace ApplicationCore.Controllers
             {
                 var client = clientService.CreateClient(clientModel);
 
+                //walletService.CreateWalletByClientId(client.ClientId);
+
                 return Created("", ClientMap.Map(client));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

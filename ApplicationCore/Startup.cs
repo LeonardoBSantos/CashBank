@@ -1,6 +1,7 @@
 using Application.Services;
 using Domain.Interfaces.Repository;
 using Domain.Interfaces.Services;
+using Infraestructure.Repositories;
 using Infrastructure;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -28,10 +29,12 @@ namespace ApplicationCore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IClientRepository, ClientRepository>();
-            services.AddScoped<IClientService, ClientService>();
             services.AddDbContext<DigitalAccountContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DATABASE_CN_STRING")));
             services.AddControllers();
+            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IWalletService, WalletService>();
+            services.AddScoped<IWalletRepository, WalletRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
