@@ -53,9 +53,17 @@ namespace Infrastructure.Repositories
         //{
 
         //}
-        //public void DeleteClient()
-        //{
+        public void DeleteClient(Guid id)
+        {
+            var client = _digitalAccountContext.Clients.Find(id);
 
-        //}
+            if (client == null)
+            {
+                throw new Exception("id not found");
+            }
+
+            _digitalAccountContext.Clients.Remove(client);
+            _digitalAccountContext.SaveChangesAsync();
+        }
     }
-    }
+}

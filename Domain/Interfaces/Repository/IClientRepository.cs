@@ -14,6 +14,6 @@ namespace Domain.Interfaces.Repository
         public Client GetClientById(string id);
         public Client CreateClient(ClientModel clientModel);
         //Client UpdateClient();
-        //void DeleteClient();
+        public void DeleteClient(Guid id);
     }
 }

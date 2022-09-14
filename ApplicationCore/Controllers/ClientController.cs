@@ -56,5 +56,20 @@ namespace ApplicationCore.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult CreateClient(Guid id)
+        {
+            try
+            {
+                clientService.DeleteClientById(id);
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

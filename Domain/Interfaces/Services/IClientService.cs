@@ -13,5 +13,6 @@ namespace Domain.Interfaces.Services
         ClientModel GetClientById(string id);
         //public Decimal GetBalance();
         public Client CreateClient(ClientModel clientModel);
+        public void DeleteClientById(Guid id);
     }
 }

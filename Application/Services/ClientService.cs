@@ -52,5 +52,18 @@ namespace Application.Services
 
             return client;
         }
+
+        public void DeleteClientById(Guid id)
+        {
+            try
+            {
+                _clientRepository.DeleteClient(id);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
+        }
     }
 }
