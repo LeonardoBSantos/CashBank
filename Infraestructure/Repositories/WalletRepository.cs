@@ -18,7 +18,19 @@ namespace Infraestructure.Repositories
             this._digitalAccountContext = digitalAccountContext;
         }
 
-        public void CreateWalletByClientId(Guid ClientId)
+        public Wallet GetWalletById(Guid id)
+        {
+            var wallet = _digitalAccountContext.Wallets.Find(id);
+
+            if(wallet == null)
+            {
+                throw new InvalidOperationException("The provided id doesn't exists");
+            }
+
+            return wallet;
+        }
+
+        public Wallet CreateWalletByClientId(Guid ClientId)
         {
             var newWallet = new Wallet()
             {
@@ -26,6 +38,22 @@ namespace Infraestructure.Repositories
             };
 
             _digitalAccountContext.Wallets.Add(newWallet);
+            _digitalAccountContext.SaveChanges();
+
+            return newWallet;
+        }
+
+        
+        public void DeleteWallet(Guid ClientId)
+        {
+            var wallet = _digitalAccountContext.Wallets.FirstOrDefault(x => x.FkClientId == ClientId);
+            
+            if (wallet == null)
+            {
+                throw new Exception("Client id not exists");
+            }
+
+            _digitalAccountContext.Wallets.Remove(wallet);
             _digitalAccountContext.SaveChanges();
         }
     }

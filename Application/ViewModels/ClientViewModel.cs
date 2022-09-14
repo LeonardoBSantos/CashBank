@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Domain.DTOs;
+using Domain.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,5 +28,8 @@ namespace Application.ViewModels
 
         [JsonProperty("address")]
         public string Address { get; set; }
+
+        [JsonProperty("wallet")]
+        public WalletModel Wallet { get; set; }
     }
 }

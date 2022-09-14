@@ -1,4 +1,5 @@
 ﻿using Application.ViewModels;
+using Domain.DTOs;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Application.Mappings
 {
     public static class ClientMap
     {
-        public static ClientViewModel Map(Client client)
+        public static ClientViewModel Map(Client client, WalletModel wallet)
         {
             var response = new ClientViewModel()
             {
@@ -19,7 +20,8 @@ namespace Application.Mappings
                 LastName = client.LastName,
                 Email = client.Email,
                 Phone = client.phone,
-                Address = client.address
+                Address = client.address,
+                Wallet = wallet
             };
 
             return response;

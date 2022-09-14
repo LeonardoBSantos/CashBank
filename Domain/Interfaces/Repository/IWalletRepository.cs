@@ -9,6 +9,8 @@ namespace Domain.Interfaces.Repository
 {
     public interface IWalletRepository
     {
-        public void CreateWalletByClientId(Guid ClientId);
+        public Wallet GetWalletById(Guid id);
+        public Wallet CreateWalletByClientId(Guid ClientId);
+        public void DeleteWallet(Guid ClientId);
     }
 }

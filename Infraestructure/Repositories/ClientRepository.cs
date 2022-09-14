@@ -63,7 +63,7 @@ namespace Infrastructure.Repositories
             }
 
             _digitalAccountContext.Clients.Remove(client);
-            _digitalAccountContext.SaveChangesAsync();
+            _digitalAccountContext.SaveChanges();
         }
     }
 }

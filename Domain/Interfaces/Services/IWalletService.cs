@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace Domain.Interfaces.Services
 {
     public interface IWalletService
     {
-        public void CreateWalletByClientId(Guid clientId);
+        public WalletModel GetWalletById(Guid id);
+        public WalletModel CreateWalletByClientId(Guid clientId);
+        public void DeleteWalletById(Guid clientId);
     }
 }

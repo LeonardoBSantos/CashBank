@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.Repository;
+﻿using Domain.DTOs;
+using Domain.Interfaces.Repository;
 using Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,53 @@ namespace Application.Services
             this._walletRepository = walletRepository;
         }
 
-        public void CreateWalletByClientId(Guid clientId)
+        public WalletModel GetWalletById(Guid id)
         {
-            _walletRepository.CreateWalletByClientId(clientId);
+            try
+            {
+                var wallet = _walletRepository.GetWalletById(id);
+
+                var walletModel = new WalletModel()
+                {
+                    WalletId = wallet.WalletId,
+                    WalletAmount = wallet.WalletAmount,
+                    FkClientId = wallet.FkClientId
+                };
+
+                return walletModel;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
+        }
+
+        public WalletModel CreateWalletByClientId(Guid clientId)
+        {
+            var newWallet = _walletRepository.CreateWalletByClientId(clientId);
+
+            var walletModel = new WalletModel()
+            {
+                WalletId = newWallet.WalletId,
+                WalletAmount = newWallet.WalletAmount,
+                FkClientId = newWallet.FkClientId
+            };
+
+            return walletModel;
+        }
+
+        public void DeleteWalletById(Guid clientId)
+        {
+            try
+            {
+                _walletRepository.DeleteWallet(clientId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
     }
 }

@@ -47,9 +47,9 @@ namespace ApplicationCore.Controllers
             {
                 var client = clientService.CreateClient(clientModel);
 
-                //walletService.CreateWalletByClientId(client.ClientId);
+                var wallet = walletService.CreateWalletByClientId(client.ClientId);
 
-                return Created("", ClientMap.Map(client));
+                return Created("", ClientMap.Map(client, wallet));
             }
             catch (Exception ex)
             {
@@ -58,11 +58,12 @@ namespace ApplicationCore.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult CreateClient(Guid id)
+        public IActionResult DeleteClient(Guid id)
         {
             try
             {
                 clientService.DeleteClientById(id);
+                walletService.DeleteWalletById(id);
 
                 return NoContent();
             }
